@@ -1,6 +1,5 @@
 var ws = new WebSocket("ws://127.0.0.1:1234", "echo-protocol");
 
-
 var registered = false;
 var clientID;
 
