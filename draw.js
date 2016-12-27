@@ -1,4 +1,7 @@
 var cv = $("canvas");
+cv.css({"border-color": "#C1E0FF", 
+	"border-width":"1px", 
+	"border-style":"solid"});
 
 var context = document.getElementById("canvas").getContext("2d");
 context.canvas.width = 900;
@@ -79,7 +82,7 @@ function printStrokes() {
 		}
 		msg += "}";
 	}
-	console.log(msg);
+	// console.log(msg);
 }
 
 function strokeToString() {

@@ -31,10 +31,10 @@ wsServer.on("request", function(r) {
 
 	// recieved  data
 	connection.on("message", function(message) {
-		console.log(">>>> " + typeof message + ", " + message.utf8Data + ", " + message.data);
+		console.log(">>>> " message.data);
 		var messageString = message.utf8Data;
 		for (var i in clients) {
-			clients[i].sendUTF(messageString);
+			clients[i].sendUTF(message.utf8Data);
 		}
 	})
 

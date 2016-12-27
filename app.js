@@ -13,9 +13,13 @@ button.addEventListener("click", function() {
 });
 
 var canvas = document.getElementById("canvas");
+// send strokes to the server
 canvas.addEventListener("mouseup", function() {
-	var message = strokeToString();
-	ws.send(message);
+	if (client.id != undefined) {
+		var message = strokeToString();
+		ws.send(JSON.stringify(strokes[strokeNum]));
+	}
+	
 })
 
 // listen from server
@@ -25,7 +29,8 @@ ws.addEventListener("message", function(e) {
 		saveInfo(msg);
 	}
 
-	document.getElementById("chatlog").innerHTML += "<p>" + msg + "</p>";
+	console.log(msg);
+	// document.getElementById("chatlog").innerHTML += "<p>" + msg + "</p>";
 });
 
 function isDirective(str) {
