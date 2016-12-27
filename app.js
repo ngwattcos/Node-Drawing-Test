@@ -10,6 +10,12 @@ button.addEventListener("click", function() {
 	ws.send(message);
 });
 
+var canvas = document.getElementById("canvas");
+canvas.addEventListener("mouseup", function() {
+	var message = strokeToString();
+	ws.send(message);
+})
+
 // listen from server
 ws.addEventListener("message", function(e) {
 	var msg = e.data;

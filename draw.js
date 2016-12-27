@@ -73,11 +73,23 @@ $("#canvas").mouseleave(function(e) {
 function printStrokes() {
 	var msg = "";
 	for (var i = 0; i < strokes.length; i++) {
-		msg += "\n{";
+		msg += "\n\n{";
 		for (var j = 0; j < strokes[i].length; j++) {
-			msg += "(" + strokes[i][j].x + ", " + strokes[i][j].y + "), ";
+			msg += " (" + strokes[i][j].x + ", " + strokes[i][j].y + ") ";
 		}
 		msg += "}";
 	}
 	console.log(msg);
+}
+
+function strokeToString() {
+	var msg = "";
+	for (var i = 0; i < strokes[strokeNum].length; i++) {
+		msg += strokes[strokeNum].x + "," + strokes[strokeNum].y;
+		if (i > 0 && i < strokes[strokeNum].length - 1) {
+			msg += ":";
+		}
+	}
+
+	return msg;
 }
