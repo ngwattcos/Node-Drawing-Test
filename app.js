@@ -1,7 +1,9 @@
 var ws = new WebSocket("ws://127.0.0.1:1234", "echo-protocol");
 
 var registered = false;
-var clientID;
+var client = {};
+
+
 
 var button = document.getElementById("button");
 
@@ -19,5 +21,24 @@ canvas.addEventListener("mouseup", function() {
 // listen from server
 ws.addEventListener("message", function(e) {
 	var msg = e.data;
+	if (isDirective(msg)) {
+		saveInfo(msg);
+	}
+
 	document.getElementById("chatlog").innerHTML += "<p>" + msg + "</p>";
 });
+
+function isDirective(str) {
+	if (str.length > 0 && str[0] == "*") {
+		return true;
+	}
+
+	return false;
+}
+
+function saveInfo(str) {
+	var commands = str.split(",");
+	var key = commands[0];
+	var value = commands[1];
+	client[key.substring(1, key.length)] = value;
+}

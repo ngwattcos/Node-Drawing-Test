@@ -24,6 +24,9 @@ wsServer.on("request", function(r) {
 	var id = count++;
 	clients[id] = connection;
 
+	// tell client his id
+	clients[id].sendUTF("*id," + id);
+
 	console.log((new Date()) + " Connection accepted [" + id + "]");
 
 	// recieved  data
