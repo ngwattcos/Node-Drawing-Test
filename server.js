@@ -31,12 +31,13 @@ wsServer.on("request", function(r) {
 
 	// recieved  data
 	connection.on("message", function(message) {
-		console.log(">>>> " message.data);
-		var messageString = message.utf8Data;
+		var messageData = JSON.stringify(message.data);
+		// send message back to each client
 		for (var i in clients) {
-			clients[i].sendUTF(message.utf8Data);
+				clients[i].sendUTF(message.utf8Data);
+			
 		}
-	})
+	});
 
 	connection.on("close", function(reasonCode, description) {
 		delete clients[id];

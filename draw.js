@@ -12,6 +12,7 @@ var paint = false;
 
 var strokeNum = -1;
 var strokes = [];
+var futureStrokes = [];
 
 function addClick(x, y, dragging) {
 	strokes[strokeNum].push({x: x, y: y});
@@ -42,13 +43,45 @@ function redraw() {
 	}
 }
 
+function addStroke(arr) {
+	strokeNum ++;
+	strokes.push(arr);
+
+	futureStrokes = [];
+}
+
+function undoStroke() {
+	if (strokes.length > 0) {
+		futureStrokes.push(strokes.splice(strokeNum, 1)[0]);
+		strokeNum --;
+	}
+}
+
+function redoStroke() {
+	if (futureStrokes.length > 0) {
+		strokes.push(futureStrokes.splice(futureStrokes.length - 1, 1)[0]);
+		strokeNum ++;
+	}
+}
+
+function clearStrokes() {
+	strokeNum = 0;
+	strokes = [];
+	futureStrokes = [];
+}
+
+function synchronize(data) {
+	strokes = data[0];
+	futureStrokes = data[1];
+	strokeNum = strokes.length;
+}
+
 $("#canvas").mousedown(function(e) {
 	var mouseX = e.pageX - this.offsetLeft;
 	var mouseY = e.pageY - this.offsetTop;
 
 
-	strokeNum ++;
-	strokes.push([]);
+	addStroke([]);
 
 	paint = true;
 	addClick(mouseX, mouseY, true);
@@ -66,7 +99,7 @@ $("#canvas").mousemove(function(e) {
 
 $("#canvas").mouseup(function(e) {
 	paint = false;
-	printStrokes();
+	// printStrokes();
 });
 
 $("#canvas").mouseleave(function(e) {
@@ -96,3 +129,34 @@ function strokeToString() {
 
 	return msg;
 }
+
+
+
+var undo = document.getElementById("undo");
+
+// clears
+undo.addEventListener("click", function() {
+	undoStroke();
+	redraw();
+});
+
+var redo = document.getElementById("redo");
+
+redo.addEventListener("click", function() {
+	redoStroke();
+	redraw();
+})
+
+var clear = document.getElementById("clear");
+
+clear.addEventListener("click", function() {
+	clearStrokes();
+
+	redraw();
+});
+
+var redrawBtn = document.getElementById("redraw");
+
+redrawBtn.addEventListener("click", function() {
+	redraw();
+});
