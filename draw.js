@@ -66,7 +66,7 @@ function redoStroke() {
 
 function clearStrokes() {
 	strokeNum = 0;
-	strokes = [];
+	strokes = [[]];
 	futureStrokes = [];
 }
 
