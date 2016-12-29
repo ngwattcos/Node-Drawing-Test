@@ -16,8 +16,6 @@ var wsServer = new WebSocketServer({
 var count = 0;
 var clients = {};
 
-var classrooms = [];
-
 
 // only runs when a request occurs
 wsServer.on("request", function(r) {
