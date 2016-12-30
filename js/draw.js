@@ -155,8 +155,8 @@ clear.addEventListener("click", function() {
 	redraw();
 });
 
-var redrawBtn = document.getElementById("redraw");
+// var redrawBtn = document.getElementById("redraw");
 
-redrawBtn.addEventListener("click", function() {
-	redraw();
-});
+// redrawBtn.addEventListener("click", function() {
+// 	redraw();
+// });
