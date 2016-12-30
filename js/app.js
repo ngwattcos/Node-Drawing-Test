@@ -85,6 +85,10 @@ function isDirective(str) {
 function saveInfo(str) {
 	var commands = str.split(",");
 	var key = commands[0];
+		key = key.substring(1, key.length);
 	var value = commands[1];
-	client[key.substring(1, key.length)] = value;
+	client[key] = value;
+
+	// console.log(key + ", " + value);
+	document.getElementById(key).innerHTML = value;
 }
